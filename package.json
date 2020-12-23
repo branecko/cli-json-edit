@@ -1,5 +1,5 @@
 {
-  "name": "json-edit-cli",
+  "name": "cli-json-edit",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/branecko/json-edit-cli.git"
+    "url": "git+https://github.com/branecko/cli-json-edit.git"
   },
   "author": "Branislav Remen",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/branecko/json-edit-cli/issues"
+    "url": "https://github.com/branecko/cli-json-edit/issues"
   },
-  "homepage": "https://github.com/branecko/json-edit-cli#readme"
+  "homepage": "https://github.com/branecko/cli-json-edit#readme",
+  "dependencies": {
+    "commander": "^6.2.1",
+    "edit-json-file": "^1.5.0",
+    "minimist": "^1.2.5"
+  }
 }
