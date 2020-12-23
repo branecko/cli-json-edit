@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const VERSION = '0.0.5';
+const VERSION = '0.0.6';
 
 const { program } = require('commander');
 const editJsonFile = require('edit-json-file');
@@ -65,24 +65,24 @@ program.version(VERSION);
 
 program
   .command('set')
-  .description('set new value to json file')
-  .requiredOption("-f, --filename [string]", "filename")
-  .requiredOption("-k, --key [string]", "key in object")
-  .requiredOption("-v, --value [string]", "new value")
+  .description('set string or number value to specific key in json file')
+  .requiredOption("-f, --filename [string]", "path to json file")
+  .requiredOption("-k, --key [string]", "key to set")
+  .requiredOption("-v, --value [string]", "new value to set")
   .action(set);
 
 program
   .command('set-array')
-  .description('set array as new value to json file')
-  .requiredOption("-f, --filename [string]", "filename")
-  .requiredOption("-k, --key [string]", "key in object")
-  .requiredOption("-v, --values [string]", "comma separated list")
+  .description('set array value to specific key in json file')
+  .requiredOption("-f, --filename [string]", "path to json file")
+  .requiredOption("-k, --key [string]", "key to set")
+  .requiredOption("-v, --values [string]", "new value as comma separated list")
   .action(setArray);
 
 program
   .command('unset')
-  .description('unset prop in json file')
-  .requiredOption("-f, --filename [string]", "filename")
+  .description('unset value of specific key in json file')
+  .requiredOption("-f, --filename [string]", "path to json file")
   .requiredOption("-k, --key [string]", "key in object")
   .action(unset);
 
