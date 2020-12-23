@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const VERSION = '0.0.4';
+const VERSION = '0.0.5';
 
 const { program } = require('commander');
 const editJsonFile = require('edit-json-file');
@@ -25,14 +25,27 @@ const set = (env) => {
         if (!isNaN(value)) {
             // number
             parsedValue = parseInt(value);
-        } else if (isJsonString(value)) {
-            // object (array)
-            parsedValue = JSON.parse(value);
         }
         file.set(key, parsedValue);
         file.save();
 
         console.log(`Value ${value} added for key ${key} in ${filename}.`)
+    }
+}
+
+const setArray = (env) => {
+    const filename = env.filename || undefined;
+    const key = env.key || undefined;
+    const values = env.values || undefined;
+    if (filename && key && values) {
+        const file = editJsonFile(filename);
+        // array
+        const parsedValue = values
+            .split(',')
+            .map(item => item.trim());
+        file.set(key, parsedValue);
+        file.save();
+        console.log(`Array ${values} added for key ${key} in ${filename}.`)
     }
 }
 
@@ -57,6 +70,14 @@ program
   .requiredOption("-k, --key [string]", "key in object")
   .requiredOption("-v, --value [string]", "new value")
   .action(set);
+
+program
+  .command('set-array')
+  .description('set array as new value to json file')
+  .requiredOption("-f, --filename [string]", "filename")
+  .requiredOption("-k, --key [string]", "key in object")
+  .requiredOption("-v, --values [string]", "comma separated list")
+  .action(setArray);
 
 program
   .command('unset')
