@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+
+const VERSION = '0.0.2';
+
 const { program } = require('commander');
 const editJsonFile = require('edit-json-file');
 
@@ -48,7 +52,7 @@ const unset = (env) => {
     }
 }
 
-program.version('0.0.1');
+program.version(VERSION);
 
 program
   .command('set')
