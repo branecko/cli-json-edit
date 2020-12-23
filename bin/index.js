@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const VERSION = '0.0.2';
+const VERSION = '0.0.3';
 
 const { program } = require('commander');
 const editJsonFile = require('edit-json-file');
@@ -8,9 +8,7 @@ const editJsonFile = require('edit-json-file');
 const isJsonString = (str) => {
     try {
         const res = JSON.parse(str);
-        console.log('res', res);
     } catch (e) {
-        console.log('err', e);
         return false;
     }
     return true;
@@ -27,11 +25,9 @@ const set = (env) => {
         if (!isNaN(value)) {
             // number
             parsedValue = parseInt(value);
-            console.log('num', parsedValue);
         } else if (isJsonString(value)) {
             // object (array)
             parsedValue = JSON.parse(value);
-            console.log('obj', parsedValue);
         }
         file.set(key, parsedValue);
         file.save();
