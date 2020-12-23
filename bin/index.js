@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const VERSION = '0.0.3';
+const VERSION = '0.0.4';
 
 const { program } = require('commander');
 const editJsonFile = require('edit-json-file');
@@ -32,7 +32,7 @@ const set = (env) => {
         file.set(key, parsedValue);
         file.save();
 
-        console.log(`Value ${value} addted under key ${key} in ${filename}.`)
+        console.log(`Value ${value} added for key ${key} in ${filename}.`)
     }
 }
 
