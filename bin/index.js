@@ -1,25 +1,16 @@
 #!/usr/bin/env node
 
-const VERSION = '0.0.6';
+const VERSION = '0.0.8';
 
 const { program } = require('commander');
 const editJsonFile = require('edit-json-file');
-
-const isJsonString = (str) => {
-    try {
-        const res = JSON.parse(str);
-    } catch (e) {
-        return false;
-    }
-    return true;
-}
 
 const set = (env) => {
     const filename = env.filename || undefined;
     const key = env.key || undefined;
     const value = env.value || undefined;
     if (filename && key && value) {
-        const file = editJsonFile(filename);
+        const file = editJsonFile(`${__dirname}/${filename}`);
         // string
         let parsedValue = value;
         if (!isNaN(value)) {
@@ -29,7 +20,7 @@ const set = (env) => {
         file.set(key, parsedValue);
         file.save();
 
-        console.log(`Value ${value} added for key ${key} in ${filename}.`)
+        console.log(`Value ${value} added for key ${key} in ${__dirname}/${filename}.`)
     }
 }
 
@@ -38,14 +29,15 @@ const setArray = (env) => {
     const key = env.key || undefined;
     const values = env.values || undefined;
     if (filename && key && values) {
-        const file = editJsonFile(filename);
+        console.log('dirname', __dirname);
+        const file = editJsonFile(`${__dirname}/${filename}`);
         // array
         const parsedValue = values
             .split(',')
             .map(item => item.trim());
         file.set(key, parsedValue);
         file.save();
-        console.log(`Array ${values} added for key ${key} in ${filename}.`)
+        console.log(`Array ${values} added for key ${key} in ${__dirname}/${filename}.`)
     }
 }
 
@@ -53,11 +45,11 @@ const unset = (env) => {
     const filename = env.filename || undefined;
     const key = env.key || undefined;
     if (filename && key) {
-        const file = editJsonFile(filename);
+        const file = editJsonFile(`${__dirname}/${filename}`);
         file.unset(key);
         file.save();
 
-        console.log(`Key ${key} removed from ${filename}.`)
+        console.log(`Key ${key} removed from ${__dirname}/${filename}.`)
     }
 }
 
