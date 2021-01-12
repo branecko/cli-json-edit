@@ -1,6 +1,6 @@
 {
   "name": "cli-json-edit",
-  "version": "0.0.9",
+  "version": "0.0.14",
   "description": "",
   "main": "bin/index.js",
   "scripts": {

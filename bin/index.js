@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const VERSION = '0.0.9';
+const VERSION = '0.0.14';
 
 const { program } = require('commander');
 const editJsonFile = require('edit-json-file');
@@ -29,15 +29,15 @@ const setArray = (env) => {
     const key = env.key || undefined;
     const values = env.values || undefined;
     if (filename && key && values) {
-        console.log('dirname', __dirname);
-        const file = editJsonFile(filename);
+        const file = editJsonFile(filename, { ignore_dots: true });
         // array
         const parsedValue = values
             .split(',')
             .map(item => item.trim());
+        console.log('parsedValue', parsedValue);
         file.set(key, parsedValue);
         file.save();
-        console.log(`Array ${values} added for key ${key} in ${__dirname}/${filename}.`)
+        console.log(`Array ${values} added for key ${key} in ${filename}.`)
     }
 }
 
